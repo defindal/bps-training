@@ -16,7 +16,12 @@
             </v-list-item-icon>
             <v-list-item-title>Home</v-list-item-title>
           </v-list-item>
-
+        <v-list-item to="disposisi">
+            <v-list-item-icon>
+              <v-icon>mdi-email</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Disposisi</v-list-item-title>
+          </v-list-item>
           <v-list-item to="about">
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
