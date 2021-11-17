@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Disposisi from '../views/disposisi/Index.vue'
+import DisposisiCreate from '../views/disposisi/Create.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,6 +15,11 @@ const routes = [
     path: '/disposisi',
     name: 'Disposisi-Index',
     component: Disposisi
+  },
+  {
+    path: '/disposisi-create',
+    name: 'Disposisi-Create',
+    component: DisposisiCreate
   },
   {
     path: '/about',
