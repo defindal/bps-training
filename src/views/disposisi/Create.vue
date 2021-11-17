@@ -41,17 +41,15 @@
             </v-col>
             <v-col cols="4">
               <v-autocomplete
+                :loading="isLoading.jenis_laporan"
                 :items="documentTypesOptions"
                 :search-input.sync="documentcategorySearch"
                 item-text="label"
                 item-value="value"
-                return-object
-                
-                :loading="isLoading.jenis_laporan"
                 color="white"
                 label="Jenis Laporan"
                 placeholder="Start typing to Search"
-                
+                return-object
               ></v-autocomplete>
             </v-col>
             <v-col cols="2">
@@ -155,6 +153,7 @@ export default {
   },
   watch :{ 
       async documentcategorySearch(val){
+        console.log(val);
         await searchDocumentCategory(val).then(res => {
             this.documentTypes = res.data
           })
