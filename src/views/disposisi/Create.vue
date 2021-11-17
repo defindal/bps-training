@@ -1,5 +1,5 @@
 <template>
-  <v-form @submit.prevent="save">
+  <v-form>
     <v-card>
       <v-card-title> Diposisi </v-card-title>
       <v-card-text>
@@ -9,7 +9,12 @@
               <v-subheader>No Surat Penugasan </v-subheader>
             </v-col>
             <v-col cols="4">
-              <v-text-field label="No"></v-text-field>
+              <v-text-field label="No" 
+              v-model="no_surat" 
+              :error-messages="NoSuratError"
+              required
+              @input="$v.no_surat.$touch()"
+              @blur="$v.no_surat.$touch()"></v-text-field>
             </v-col>
             <v-col cols="2">
               <v-subheader>Tanggal Penugasan</v-subheader>
@@ -25,8 +30,13 @@
                     clearable
                     label="Format (DD/MMMM/YYYY)"
                     readonly
+                    required
                     v-bind="attrs"
+                    v-model="tanggal"
+                    :error-messages="tanggalError"
                     v-on="on"
+                    @input="$v.tanggal.$touch()"
+                    @blur="$v.tanggal.$touch()"
                     @click:clear="date = null"
                   ></v-text-field>
                 </template>
@@ -83,11 +93,12 @@
           <v-row>
             <div class="text-center">
               <center>
-                <v-btn block color="primary" class="mt-6" type="submit">
+                <v-btn block color="primary" class="mt-6" 
+                    type="submit" @click="submit">
                   Save
                 </v-btn>
               </center>
-
+                
               <!-- <v-btn class="ma-2" :loading="loading" :disabled="loading" color="primary"
               @click="loader = 'loading'">
               Simpan
@@ -107,15 +118,21 @@
 <script>
 import searchDocumentCategory 
     from '../../services/documentCategory.js'
+import { validationMixin } from 'vuelidate'
+import { required, maxLength } from 
+    'vuelidate/lib/validators'
+
 
 export default {
+
   setup(props, content) {
     console.log("--",props,content);
   },
+  mixins: [validationMixin],
   data: () => ({
     documentTypes :[],
     documentcategorySearch: null,
-    document_id: null,
+    
     images: null,
     msg: null,
     // datepicker
@@ -130,26 +147,44 @@ export default {
       pengendali_mutu: false,
       jenis_laporan: false,
     },
-    disposisiObject : {
-      satker: null,
-      ketua_tim: null,
-      pengendali_teknis: null,
-      pengendali_mutu: null,
-      jenis_laporan: null,
-      inspektor_wilayah: null,
-      inspektor_utama: null,
-      tanggal: null,
-      file: null,
-    },
+
+    document_id: null,
+    tanggal: '',
+    no_surat : '',
+    jenis_laporan: null,
+    satker: null,
+    file: null,
+   
+    ketua_tim: null,
+    pengendali_teknis: null,
+    pengendali_mutu: null,
+    inspektor_wilayah: null,
+    inspektor_utama: null,
     readOnly: {
       inspektor_wilayah: null,
       inspektor_utama: null,
     },
   }),
+  validations :{
+    tanggal: {required},
+    no_surat : {required , maxLength : maxLength(10)},    
+  },
   computed: {
       documentTypesOptions() {
         return this.documentTypes;
       },
+      tanggalError(){
+          const errors = [];
+          if(!this.$v.tanggal.$dirty) return errors
+          !this.$v.tanggal.required && errors.push("Tanggal Harus diisi")
+          return errors;
+      },
+        NoSuratError(){
+          const errors = [];
+          if(!this.$v.no_surat.$dirty) return errors
+          !this.$v.no_surat.required && errors.push("No Surat Harus diisi")
+          return errors;
+      }
   },
   watch :{ 
       async documentcategorySearch(val){
@@ -160,6 +195,11 @@ export default {
           .catch(err => {
             console.log(err)
           })
+      }
+  },
+  methods:{
+      submit(){
+           this.$v.$touch()
       }
   }
 };
