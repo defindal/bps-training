@@ -14,7 +14,8 @@
               :error-messages="NoSuratError"
               required
               @input="$v.no_surat.$touch()"
-              @blur="$v.no_surat.$touch()"></v-text-field>
+              @blur="$v.no_surat.$touch()">
+            </v-text-field>
             </v-col>
             <v-col cols="2">
               <v-subheader>Tanggal Penugasan</v-subheader>
@@ -120,7 +121,7 @@ import searchDocumentCategory
     from '../../services/documentCategory.js'
 import { validationMixin } from 'vuelidate'
 import { required, maxLength } from 
-    'vuelidate/lib/validators'
+    'vuelidate/lib/validators/'
 
 
 export default {
@@ -176,7 +177,8 @@ export default {
       tanggalError(){
           const errors = [];
           if(!this.$v.tanggal.$dirty) return errors
-          !this.$v.tanggal.required && errors.push("Tanggal Harus diisi")
+          !this.$v.tanggal.required && 
+            errors.push("Tanggal Harus diisi")
           return errors;
       },
         NoSuratError(){
