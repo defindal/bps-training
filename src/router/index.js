@@ -19,7 +19,8 @@ const routes = [{
     name: 'Disposisi-Index',
     component: Disposisi,
     meta: {
-      isRouteFound: true
+      isRouteFound: true,
+      isAdmin : true
     }
   },
   {
@@ -67,17 +68,21 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.isRouteFound)) {
     let userId = localStorage.getItem('id_user')
     if (to.name !== 'Login' && !userId) {
+      alert("harus login terlebih dahulu")
       next({
         name: "Login"
       })
     } else if (to.name == 'Login' && userId != null) {
+      alert("sudah login")
       next({
         name: 'Home'
       })
     } else {
       if (to.matched.some(record => record.meta.isAdmin)) {
+        alert("sudah login, dengan role admin")
         next()
       } else {
+        alert("sudah login, dengan role guest")
         next()
       }
     }

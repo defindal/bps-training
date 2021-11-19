@@ -34,6 +34,12 @@
             </v-list-item-icon>
             <v-list-item-title>About</v-list-item-title>
           </v-list-item>
+          <v-list-item @click="logout()"> 
+            <v-list-item-icon>
+              <v-icon>mdi-exit-to-app</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -48,5 +54,16 @@
       drawer: false,
       group: null,
     }),
+    methods:{
+      logout(){
+              localStorage.removeItem("id_user")
+              localStorage.removeItem("name")
+              localStorage.removeItem("position_name")
+              localStorage.removeItem("email")
+              this.$router.push({
+                name : 'Login'
+              })
+      }
+    }
   }
 </script>
