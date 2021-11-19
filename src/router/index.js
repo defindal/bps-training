@@ -3,9 +3,28 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Disposisi from '../views/disposisi/Index.vue'
 import DisposisiCreate from '../views/disposisi/Create.vue'
+import VueOffline from '../views/VueOffline.vue'
+import Penyimpanan from '../views/Penyimpanan.vue'
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+  {
+    path: '/penyimpanan',
+    name: 'Penyimpanan',
+    component: Penyimpanan,
+    meta: {
+      isRouteFound: true
+    }
+  }, 
+  {
+    path: '/vue-offline',
+    name: 'Vue-Offline',
+    component: VueOffline,
+    meta: {
+      isRouteFound: true
+    }
+  }, 
+  {
     path: '/',
     name: 'Home',
     component: Home,
