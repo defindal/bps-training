@@ -8,35 +8,22 @@ Vue.use(VueRouter)
 const routes = [{
     path: '/',
     name: 'Home',
-    component: Home,
-    meta: {
-      isRouteFound: true,
-      isAdmin: true
-    }
+    component: Home
   },
   {
     path: '/disposisi',
     name: 'Disposisi-Index',
-    component: Disposisi,
-    meta: {
-      isRouteFound: true
-    }
+    component: Disposisi
   },
   {
     path: '/disposisi-create',
     name: 'Disposisi-Create',
-    component: DisposisiCreate,
-    meta: {
-      isRouteFound: true
-    }
+    component: DisposisiCreate
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue'),
-    meta: {
-      isRouteFound: true
-    }
+    component: () => import('../views/Login.vue')
   },
   {
     path: '/about',
@@ -44,52 +31,12 @@ const routes = [{
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ '../views/About.vue'),
-    meta: {
-      isRouteFound: true
-    }
+    component: () => import( /* webpackChunkName: "about" */ '../views/About.vue')
   },
-  {
-    path: '*',
-    component: () => import('../components/404.vue'),
-    meta: {
-      isRouteFound: false
-    }
-  }
 ]
 
 const router = new VueRouter({
   routes
-})
-
-
-router.beforeEach((to, from, next) => {
-  alert(to.name);
-  if (to.matched.some(record => record.meta.isRouteFound)) {
-    let userId = sessionStorage.getItem('id_user')
-    if (to.name !== 'Login' && !userId) {
-      alert("not authorized")
-      next({
-        name: "Login"
-      })
-    } else if (to.name == 'Login' && userId != null) {
-      alert("already login");
-      next({
-        name: 'Home'
-      })
-    } else {
-      if (to.matched.some(record => record.meta.isAdmin)) {
-        alert("admin")
-        next()
-      } else {
-        alert("guest")
-        next()
-      }
-    }
-  } else {
-    next()
-  }
-
 })
 
 export default router
