@@ -47,10 +47,10 @@ export default{
                 let cekLogin = null;
                 try {
                     cekLogin = await loginPost(this.userData);
-                    sessionStorage.setItem("id_user",cekLogin.data.user_id)
-                    sessionStorage.setItem("name",cekLogin.data.name)
-                    sessionStorage.setItem("position_name",cekLogin.data.position.position_name)
-                    sessionStorage.setItem("email",cekLogin.data.email)
+                    localStorage.setItem("id_user",cekLogin.data.user_id)
+                    localStorage.setItem("name",cekLogin.data.name)
+                    localStorage.setItem("position_name",cekLogin.data.position.position_name)
+                    localStorage.setItem("email",cekLogin.data.email)
                    
                     alert('Berhasil Login');
                     this.$router.push('/');

@@ -65,7 +65,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.isRouteFound)) {
-    let userId = sessionStorage.getItem('id_user')
+    let userId = localStorage.getItem('id_user')
     if (to.name !== 'Login' && !userId) {
       next({
         name: "Login"
