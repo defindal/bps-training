@@ -11,6 +11,8 @@
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "vue-flag-icon": "^1.0.6",
+    "vue-i18n": "^8.26.7",
     "vue-router": "^3.2.0",
     "vuelidate": "^0.7.6",
     "vuetify": "^2.4.0"
