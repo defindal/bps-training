@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <v-container fluid>  
-      <h1>This is an home page</h1>
+      <h2>WELCOME {{this.name}} - {{this.position_name}}</h2> <br>
       <v-btn v-for="item in languages" :key="item.title" 
       @click="changeLocale(item.language)">
         <flag :iso="item.flag"/> {{item.title}}
@@ -24,6 +24,8 @@ import i18n from '../plugins/i18n'
 export default {
   data(){
     return {
+      name : "",
+      position_name : "",
       date : new Date(),
       languages :[{
         flag : "id",
@@ -38,10 +40,18 @@ export default {
       ]
     }
   },
+  created(){
+    this.getSession();
+  },
   methods:{
     changeLocale(language){
       i18n.locale = language
-    }
+    },
+    getSession(){
+      console.log(sessionStorage.getItem("name"));
+      this.name = sessionStorage.getItem("name");
+      this.position_name = sessionStorage.getItem("position_name");
+    },
   }
 
 }
