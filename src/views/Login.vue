@@ -13,7 +13,7 @@
                     outlined
                     :type="'password'"
                     label="Password"
-                    placeholder="············"
+                    placeholder="<your password>"
                     >
                 </v-text-field>
                 <v-btn block color="primary" type="submit">
