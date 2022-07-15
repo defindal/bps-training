@@ -30,7 +30,7 @@ export default {
       languages :[{
         flag : "id",
         language : "id",
-        title : "Indonesia"
+        title : "Bahasa"
       },
       {
         flag : "us",
